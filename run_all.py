@@ -18,22 +18,12 @@ if(len(sys.argv)==2):
     if sys.argv[1]=="--preprocess":
         preprocess=True
 
-#task 1.1
-filename = "fer2018/reduced_arffs/reduced.arff"
-testName = "task1_1"
-
-# #task3
-# filename="fer2018/reduced_arffs/fer2018.reduced.arff"
-# testName = "task_5_clustering"
-
-# #task5
-# filename="fer2018/reduced_arffs/fer2018surprise.reduced.arff"
-# testName = "surprise"
-
-#task7
-# filename="fer2018/transformed_arffs/transformed_14.arff"
-# testName = "task7_14Pixels_seed_test"
-
+#part1
+filename = "fer2018/reduced_arffs/cfs_reduced.arff"
+# testName = "part1_minimal_binary"
+# testName = "part1_minimal_pruning"
+# testName = "part1_minimal_confidence"
+testName = "part1_minimal_instances"
 
 class myThread (threading.Thread):
    def __init__(self, threadID, name, function, args=None):
@@ -82,13 +72,13 @@ def extract():
         extractor = extract_pixels.extract_pix(filename)
         extractor.run()
 
-def run_j48_cross(args):
+def run_j48_cross(options):
     global filename, testName
     jvm_helper = classify.cw3_helper()
 
     j48_cross = classify.cw3_classifier()
     j48_cross.load_data(filename)
-    j48_cross.run_crossval("results/"+str(testName),"J48","weka.classifiers.trees.J48", ["-K", "3", "-W"])
+    j48_cross.run_crossval("results/"+str(testName),"J48","weka.classifiers.trees.J48", options)
 
 
 def run_classifiers():
@@ -98,44 +88,37 @@ def run_classifiers():
 
     threads = []
 
-    #TASK 1
-    # Create new threads
-    # thread1 = myThread(1, "IBK-Cross-Val", run_ibk_crossval)
-    # thread2 = myThread(2, "IBK-Split", run_ibk_split)
-    # thread3 = myThread(3, "run_nb_split", run_nb_split)
-    # thread4 = myThread(4, "run_nb_crossval", run_nb_crossval)
+    #Part 1 - Binary Splits
+    # thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
+    # thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-B", "-M", "2"])
 
-    #TASK3
-    # thread1 = myThread(1, "run_bayes_split", run_bayes_split, (1))
-    # thread2 = myThread(2, "run_bayes_split", run_bayes_split, (3))
-    # thread3 = myThread(3, "run_bayes_split", run_bayes_split, (5))
+    #Part 1 - Pruning
+    # thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
+    # thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-U", "-M", "2"])
 
-    #TASK5
-    # thread1 = myThread(1, "run_simplekm_noclass", run_simplekm_noclass)
-    # thread2 = myThread(2, "run_simplekm_with_class", run_simplekm_with_class)
+    #Part 1 - Confidence Threshold
+    # thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.10", "-M", "2"])
+    # thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
+    # thread3 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.35", "-M", "2"])
+    # thread4 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.50", "-M", "2"])
 
-    #TASK7
-    # thread1 = myThread(1, "run_clusters_auto1", run_clusters_auto1)
-    # thread1 = myThread(2, "run_clusters_auto2", run_clusters_auto2)
-
-    # thread1 = myThread(1, "run_clusters_manual", run_clusters_manual, 4)
-    # thread2 = myThread(2, "run_clusters_manual", run_clusters_manual, (15))
-    # thread3 = myThread(3, "run_clusters_manual", run_clusters_manual, (7))
-    # thread4 = myThread(4, "run_clusters_manual", run_clusters_manual, (10))
-
-    thread1 = myThread(4, "run_seeds_manual", run_j48_cross, (0))
+    # #Part 1 - Minimum_Number_Of_Instances
+    thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "1"])
+    thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
+    thread3 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "3"])
+    thread4 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "4"])
 
     # Start new Threads
     thread1.start()
-    # thread2.start()
-    # thread3.start()
-    # thread4.start()
+    thread2.start()
+    thread3.start()
+    thread4.start()
 
     # Add threads to thread list
     threads.append(thread1)
-    # threads.append(thread2)
-    # threads.append(thread3)
-    # threads.append(thread4)
+    threads.append(thread2)
+    threads.append(thread3)
+    threads.append(thread4)
 
     # Wait for all threads to complete
     for t in threads:

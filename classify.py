@@ -20,7 +20,7 @@ class cw3_classifier():
         print("\nLoading dataset: " + filename)
         loader = Loader(classname="weka.core.converters.ArffLoader")
         data = loader.load_file(filename)
-        data.class_is_first()
+        data.class_is_last()
         if(filter):
             data = self.filter_data(data)
         self.training_data = data
@@ -31,7 +31,7 @@ class cw3_classifier():
         print("\nLoading dataset: " + filename)
         loader = Loader(classname="weka.core.converters.ArffLoader")
         data = loader.load_file(filename)
-        data.class_is_first()
+        data.class_is_last()
         if(filter):
             data = self.filter_data(data)
         train, test = data.train_test_split(self.validation_split, Random(1))
@@ -59,42 +59,58 @@ class cw3_classifier():
         evl.crossvalidate_model(cls, self.training_data, 10, Random(1))
 
         resultsString = self.print_both(str(evl.summary()),resultsString)
+        resultsString += "\n"
         resultsString = self.print_both(str(evl.class_details()),resultsString)
+        resultsString += "\n"
         resultsString = self.print_both(str(evl.confusion_matrix),resultsString)
-        buildTimeString = classifier_name+" Cross Eval Classifier Evaluated in "+str(time.time()-buildTimeStart)+" secs.\n"
+        buildTimeString = "\n\n"+classifier_name+" Cross Eval Classifier Evaluated in "+str(time.time()-buildTimeStart)+" secs.\n"
         resultsString = self.print_both(buildTimeString,resultsString)
         
-        #Save Results and Cleanup
-        self.save_results(classifier_name+"_Crossval",resultsString,output_directory)
+        options_string = ""
+        for option in options_list:
+            options_string = options_string+str(option)
 
-    def run_naive_bayes_split(self, output_directory):
+        options_string = options_string.replace(".","-")
+        options_string = options_string.replace("-","_")
+        #Save Results and Cleanup
+        self.save_results(classifier_name+options_string+"_Crossval",resultsString,output_directory)
+
+    def run_split(self, output_directory, classifier_name, classifier_weka_spec, options_list):
         # build classifier
-        print("\nBuilding Classifier on training data.")
+        print("\nBuilding "+classifier_name+" Classifier on training data.")
         buildTimeStart=time.time()
-        cls = Classifier(classname="weka.classifiers.bayes.NaiveBayes")
+        cls = Classifier(classname=classifier_name, options=options_list)
         cls.build_classifier(self.training_data)
 
         resultsString = ""
         resultsString = self.print_both(str(cls),resultsString)
 
-        buildTimeString = "NB Split Classifier Built in "+str(time.time()-buildTimeStart)+" secs.\n"
+        buildTimeString = classifier_name+" Cross Eval Classifier Built in "+str(time.time()-buildTimeStart)+" secs.\n"
         resultsString = self.print_both(buildTimeString,resultsString)
         
         #Evaluate Classifier
-        resultsString = self.print_both("\nEvaluating on test data.",resultsString)
+        resultsString = self.print_both("\nCross Evaluating on test data.",resultsString)
 
         buildTimeStart=time.time()
         evl=Evaluation(self.training_data)
         evl.test_model(cls, self.testing_data)
 
         resultsString = self.print_both(str(evl.summary()),resultsString)
+        resultsString += "\n"
         resultsString = self.print_both(str(evl.class_details()),resultsString)
+        resultsString += "\n"
         resultsString = self.print_both(str(evl.confusion_matrix),resultsString)
-        buildTimeString = "\nNB Split Classifier Evaluated in "+str(time.time()-buildTimeStart)+" secs.\n"
+        buildTimeString = "\n\n"+classifier_name+" Cross Eval Classifier Evaluated in "+str(time.time()-buildTimeStart)+" secs.\n"
         resultsString = self.print_both(buildTimeString,resultsString)
         
+        options_string = ""
+        for option in options_list:
+            options_string = options_string+str(option)
+
+        options_string = options_string.replace(".","-")
+        options_string = options_string.replace("-","_")
         #Save Results and Cleanup
-        self.save_results("Naive_Bayes",resultsString,output_directory)
+        self.save_results(classifier_name+options_string+"_Crossval",resultsString,output_directory)
 
     def save_results(self, classifier, string, output_directory, bif=False):
         try:
@@ -138,7 +154,7 @@ class cw3_helper():
     def __init__(self, start=True):
         if(start):
             #increased to 4gb for bayes network.
-            jvm.start(max_heap_size="6g")
+            jvm.start(max_heap_size="3g")
 
     def cleanup(self):
         jvm.stop()
