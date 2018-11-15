@@ -80,6 +80,14 @@ def run_j48_cross(options):
     j48_cross.load_data(filename)
     j48_cross.run_crossval("results/"+str(testName),"J48","weka.classifiers.trees.J48", options)
 
+def run_j48_holdout(options):
+    global filename, testName
+    jvm_helper = classify.cw3_helper()
+
+    j48_cross = classify.cw3_classifier()
+    j48_cross.load_data_split(filename,30)
+    j48_cross.run_split("results/"+str(testName),"J48","weka.classifiers.trees.J48", options)
+
 
 def run_classifiers():
 
@@ -89,24 +97,24 @@ def run_classifiers():
     threads = []
 
     #Part 1 - Binary Splits
-    # thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
-    # thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-B", "-M", "2"])
+    # thread1 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "2"])
+    # thread2 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-B", "-M", "2"])
 
     #Part 1 - Pruning
-    # thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
-    # thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-U", "-M", "2"])
+    # thread1 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "2"])
+    # thread2 = myThread(4, "run_j48_cross", run_j48_holdout, ["-U", "-M", "2"])
 
     #Part 1 - Confidence Threshold
-    # thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.10", "-M", "2"])
-    # thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
-    # thread3 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.35", "-M", "2"])
-    # thread4 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.50", "-M", "2"])
+    # thread1 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.10", "-M", "2"])
+    # thread2 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "2"])
+    # thread3 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.35", "-M", "2"])
+    # thread4 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.50", "-M", "2"])
 
     # #Part 1 - Minimum_Number_Of_Instances
-    thread1 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "1"])
-    thread2 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "2"])
-    thread3 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "3"])
-    thread4 = myThread(4, "run_j48_cross", run_j48_cross, ["-C", "0.25", "-M", "4"])
+    thread1 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "1"])
+    thread2 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "2"])
+    thread3 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "3"])
+    thread4 = myThread(4, "run_j48_cross", run_j48_holdout, ["-C", "0.25", "-M", "4"])
 
     # Start new Threads
     thread1.start()
