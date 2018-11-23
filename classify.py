@@ -37,6 +37,25 @@ class cw3_classifier():
         train, test = data.train_test_split(self.validation_split, Random(1))
         self.training_data = train
         self.testing_data = test
+
+    def load_data_seperate(self, trainingFilename, testingFilename):
+        self.trainingFilename = trainingFilename
+        self.testingFilename = testingFilename
+
+        print("\nLoading dataset: " + trainingFilename + " & " + testingFilename)
+        loader1 = Loader(classname="weka.core.converters.ArffLoader")
+        loader2 = Loader(classname="weka.core.converters.ArffLoader")
+
+        print("\nLoading Training Data:")
+        training_data = loader1.load_file(trainingFilename)
+        training_data.class_is_first()
+
+        print("\nLoading Testing Data:")
+        testing_data = loader2.load_file(testingFilename)
+        testing_data.class_is_first()
+
+        self.training_data = training_data
+        self.testing_data = testing_data
     
     def run_crossval(self, output_directory, classifier_name, classifier_weka_spec, options_list):
         # build classifier

@@ -6,15 +6,20 @@ import csv
 from random import shuffle
 
 class extract_pix():
-    def __init__(self, filename):
+    def __init__(self, filename, happyFile):
         self.filename = filename
+        self.happy = happyFile
 
     def output_header(self,output_file,pixel_range):
         emotions_full = "{angry,disgust,fear,happy,neutral,sad,surprise}"
+        emotions_happy = "{NotHappy,Happy}"
 
         output_file.write("@Relation faces\n")
 
-        emotion_string = str.format("@ATTRIBUTE emotion {0}\n",emotions_full)
+        if(self.happy):
+            emotion_string = str.format("@ATTRIBUTE emotion {0}\n",emotions_full)
+        else:
+            emotion_string = str.format("@ATTRIBUTE emotion {0}\n",emotions_happy)
 
         output_file.write(emotion_string)
 

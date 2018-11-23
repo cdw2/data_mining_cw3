@@ -11,7 +11,7 @@ class Convert:
     def __init__(self,filename, skip):
         self.command = skip
         self.filename = filename
-        self.emotion_name=os.path.basename(self.filename)[7:-4]
+        self.emotion_name="Happy"
 
     def output_header(self, output_file):
         emotions_full = "{angry,disgust,fear,happy,neutral,sad,suprise}"
@@ -19,7 +19,7 @@ class Convert:
         output_file.write("@Relation faces\n")
         
         if(self.command):
-            emotions_skip = "{other,"+self.emotion_name+"}"
+            emotions_skip = "{NotHappy,"+self.emotion_name+"}"
             emotion_string = str.format("@ATTRIBUTE emotion {0}\n",emotions_skip)
         else:
             emotion_string = str.format("@ATTRIBUTE emotion {0}\n",emotions_full)
@@ -58,14 +58,17 @@ class Convert:
                 continue
 
             if(self.command):
-                if(row[0]=="0"):
-                    return_row = "other"
+                if(row[-1]=="NotHappy"):
+                    return_row = "NotHappy"
                 else:
                     return_row = self.emotion_name
             else:
                 return_row = self.convert_emotion(row[0])
 
-            pixel_array = row[1].split(" ")
+            if(self.command):
+                pixel_array = row[:-1]
+            else:
+                pixel_array = row[1].split(" ")
 
             for pixel in pixel_array:
                 return_row += ","+str(int(pixel)/255)
