@@ -18,16 +18,28 @@ if(len(sys.argv)==2):
     if sys.argv[1]=="--preprocess":
         preprocess=True
 
-#part1
-filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
-filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
-# filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
+#part2
+filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
+filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
 filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
 
+#Part 1
 # testName = "part1_minimal_binary"
 # testName = "part1_minimal_pruning"
 # testName = "part1_minimal_confidence"
-testName = "neural_network/train_test/validation"
+
+# experiemnt_name = "cross_validation"
+# experiemnt_name = "train_test"
+# experiment_name = "train70_test30"
+experiment_name = "train30_test70"
+
+#Part 2
+# testName = "neural_network/"+experiment_name+"/learning_rate"
+# testName = "neural_network/"+experiment_name+"/momentum"
+# testName = "neural_network/"+experiment_name+"/num_epochs"
+# testName = "neural_network/"+experiment_name+"/num_layers"
+# testName = "neural_network/"+experiment_name+"/num_neurons"
+testName = "neural_network/"+experiment_name+"/validation"
 
 class myThread (threading.Thread):
    def __init__(self, threadID, name, function, args=None):
@@ -108,9 +120,9 @@ def run_mlp_split(options):
     jvm_helper = classify.cw3_helper()
 
     mlp = classify.cw3_classifier()
-    # j48_cross.load_data_seperate(filename1,filename2)
-    mlp.load_data_seperate(filename_full)
-    mlp.run_crossval("results/"+str(testName),"MLP","weka.classifiers.functions.MultilayerPerceptron", options)
+    mlp.load_data_split(filename_full, 30)
+    # mlp.load_data_seperate(filename1,filename2)
+    mlp.run_split("results/"+str(testName),"MLP","weka.classifiers.functions.MultilayerPerceptron", options)
 
 
 def run_classifiers():
@@ -119,6 +131,10 @@ def run_classifiers():
     jvm_helper.cleanup()
 
     threads = []
+    thread1 = None
+    thread2 = None
+    thread3 = None
+    thread4 = None
 
     #Part 1 - Binary Splits
     # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
@@ -141,21 +157,59 @@ def run_classifiers():
     # thread4 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "4"])
 
 
-    #Part2 - MLP
-    thread1 = myThread(4, "run_mlp", run_mlp_cross, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "30", "-H", "4", "-R"])
-    thread2 = myThread(4, "run_mlp", run_mlp_cross, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "40", "-H", "4", "-R"])
+    #Part2 - MLP ==========================================================
+    mlpfunction = run_mlp_split
+    #learning rate
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "3.0", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.03", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.003", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
 
-    # Start new Threads
-    thread1.start()
-    thread2.start()
-    # thread3.start()
-    # thread4.start()
+    # #momentum
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.1", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.3", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.4", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
 
-    # Add threads to thread list
-    threads.append(thread1)
-    threads.append(thread2)
-    # threads.append(thread3)
-    # threads.append(thread4)
+    # #num_epochs
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "200", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "300", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "400", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+
+    # #num_layers
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4,4", "-R"])
+    # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4,4,4", "-R"])
+    # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4,4,4,4", "-R"])
+
+    # #num_neurons
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "1", "-R"])
+    # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "8", "-R"])
+    # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "12", "-R"])
+
+    # #validation
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "10", "-H", "4", "-R"])
+    # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
+    # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "30", "-H", "4", "-R"])
+    # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "40", "-H", "4", "-R"])
+    
+    if thread1 is not None:
+        thread1.start()
+        threads.append(thread1)
+   
+    if thread2 is not None:
+        thread2.start()
+        threads.append(thread2)
+        
+    if thread3 is not None:
+        thread3.start()
+        threads.append(thread3)
+        
+    if thread4 is not None:
+        thread4.start()
+        threads.append(thread4)
 
     # Wait for all threads to complete
     for t in threads:

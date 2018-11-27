@@ -104,11 +104,11 @@ class cw3_classifier():
         resultsString = ""
         resultsString = self.print_both(str(cls),resultsString)
 
-        buildTimeString = classifier_name+" Cross Eval Classifier Built in "+str(time.time()-buildTimeStart)+" secs.\n"
+        buildTimeString = classifier_name+"Split Classifier Built in "+str(time.time()-buildTimeStart)+" secs.\n"
         resultsString = self.print_both(buildTimeString,resultsString)
         
         #Evaluate Classifier
-        resultsString = self.print_both("\nCross Evaluating on test data.",resultsString)
+        resultsString = self.print_both("\nEvaluating on test data.",resultsString)
 
         buildTimeStart=time.time()
         evl=Evaluation(self.training_data)
@@ -119,7 +119,7 @@ class cw3_classifier():
         resultsString = self.print_both(str(evl.class_details()),resultsString)
         resultsString += "\n"
         resultsString = self.print_both(str(evl.confusion_matrix),resultsString)
-        buildTimeString = "\n\n"+classifier_name+" Cross Eval Classifier Evaluated in "+str(time.time()-buildTimeStart)+" secs.\n"
+        buildTimeString = "\n\n"+classifier_name+"Classifier Evaluated in "+str(time.time()-buildTimeStart)+" secs.\n"
         resultsString = self.print_both(buildTimeString,resultsString)
         
         options_string = ""
@@ -129,7 +129,7 @@ class cw3_classifier():
         options_string = options_string.replace(".","-")
         options_string = options_string.replace("-","_")
         #Save Results and Cleanup
-        self.save_results(classifier_name+options_string+"_Crossval",resultsString,output_directory)
+        self.save_results(classifier_name+options_string+"_Split",resultsString,output_directory)
 
     def save_results(self, classifier, string, output_directory, bif=False):
         try:
@@ -173,7 +173,7 @@ class cw3_helper():
     def __init__(self, start=True):
         if(start):
             #increased to 4gb for bayes network.
-            jvm.start(max_heap_size="3g")
+            jvm.start(max_heap_size="2g")
 
     def cleanup(self):
         jvm.stop()
