@@ -1,0 +1,475 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.MultilayerPerceptron -L 0.3 -M 0.2 -N 100 -V 0 -S 0 -E 20 -H a -G -A -R
+Relation:     faces-weka.filters.unsupervised.attribute.Remove-V-R2-3,6,24-26,39,49-50,61,73,121,133,157-158,175,181-183,194,202,205-206,222,227,229-230,246,254,294,296,309,314,319,322,345-346,353,358,369-370,378,385-386,393,402-403,417-418,426,434,446,455,457,468-471,483,492-495,505-506,517,524,537,546,549,552-554,556,560-562,565,568-569,571,1-weka.filters.unsupervised.attribute.Remove-R1-17,19-35,37-39,43-44,49,51-55,59,64-65,67-77,80-81
+Instances:    35887
+Attributes:   21
+              pixel180
+              pixel343
+              pixel367
+              pixel368
+              pixel376
+              pixel391
+              pixel400
+              pixel401
+              pixel415
+              pixel424
+              pixel467
+              pixel468
+              pixel469
+              pixel490
+              pixel491
+              pixel492
+              pixel493
+              pixel515
+              pixel563
+              pixel566
+              emotion
+Test mode:    split 70.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+Sigmoid Node 0
+    Inputs    Weights
+    Threshold    -2.142950014187516
+    Node 8    0.5487917506624007
+    Node 9    0.31952883425737927
+    Node 10    1.0165419494083443
+    Node 11    -0.2732127886559349
+    Node 12    0.2170372026628233
+    Node 13    -0.14136197219753976
+    Node 14    0.07792362636264927
+    Node 15    0.29019666359748647
+    Node 16    -1.1348131316168248
+    Node 17    0.39545052167248396
+    Node 18    -0.9505365594171871
+    Node 19    0.8881636831954169
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -3.5208287484636402
+    Node 8    -1.0039647405084795
+    Node 9    -0.033558185038587776
+    Node 10    -0.7275786519982718
+    Node 11    -0.28713964903755534
+    Node 12    -0.5469938032279563
+    Node 13    -1.3205013709586462
+    Node 14    -0.8724138079609671
+    Node 15    0.0980486045066404
+    Node 16    -0.29679014977285817
+    Node 17    -1.204874352794785
+    Node 18    -1.1673337074220869
+    Node 19    -0.5466801124415843
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -2.0168766744790725
+    Node 8    0.19514232483312563
+    Node 9    0.28115500811845306
+    Node 10    -0.22979756593905135
+    Node 11    -0.4206641310122634
+    Node 12    0.6455907115451393
+    Node 13    0.03598334279105427
+    Node 14    -0.09490978886995059
+    Node 15    0.302314782258395
+    Node 16    -0.311213207184
+    Node 17    -0.53119023993356
+    Node 18    -0.045389392970833886
+    Node 19    0.5175881136517565
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -0.2017032755292125
+    Node 8    -1.2700484535272247
+    Node 9    -1.5897195653247214
+    Node 10    -1.1447868136838513
+    Node 11    1.7343115768165156
+    Node 12    -1.946224841240542
+    Node 13    -2.1932010843335346
+    Node 14    0.20192625416941717
+    Node 15    -0.39581077822106636
+    Node 16    -0.2147995315331309
+    Node 17    -1.5500545899809433
+    Node 18    0.7402513656749035
+    Node 19    -1.7035238446895078
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -1.1259069612384853
+    Node 8    -1.3310561433301102
+    Node 9    -0.058373345489025945
+    Node 10    0.8663700672282367
+    Node 11    -0.8341472386070914
+    Node 12    -0.4217579665316115
+    Node 13    0.3928944665533131
+    Node 14    -2.9257109881394
+    Node 15    -2.5813362540602043
+    Node 16    0.42021300987087823
+    Node 17    -0.8039935429517968
+    Node 18    -1.1725833505619867
+    Node 19    0.2699651664481025
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -1.852082744749362
+    Node 8    -0.8086296440690995
+    Node 9    0.8637862835029496
+    Node 10    0.05142826176267805
+    Node 11    -0.7958201921325041
+    Node 12    1.3708901804005293
+    Node 13    0.724548128041909
+    Node 14    -0.7589002040675162
+    Node 15    -0.39527480822880606
+    Node 16    -1.3986290954611946
+    Node 17    1.8331253842245407
+    Node 18    0.8751086554025777
+    Node 19    0.9458156259927782
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -2.546706615976674
+    Node 8    -0.4313536702020507
+    Node 9    0.5731746000647278
+    Node 10    -2.8273162141663417
+    Node 11    -0.38573593263218525
+    Node 12    -2.046337576075943
+    Node 13    0.5114334615212898
+    Node 14    2.1334506858838185
+    Node 15    1.6833555890792078
+    Node 16    1.1713922595230677
+    Node 17    -0.8589887068217021
+    Node 18    -2.579044270303597
+    Node 19    -3.0641910850654623
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -3.8380207154985664
+    Attrib pixel180    -0.01600729712492274
+    Attrib pixel343    -0.37545380710670506
+    Attrib pixel367    0.1130611039341693
+    Attrib pixel368    0.301421995817971
+    Attrib pixel376    -1.0194326614724618
+    Attrib pixel391    -0.642633497259044
+    Attrib pixel400    -0.5453874851107093
+    Attrib pixel401    0.23555287593622137
+    Attrib pixel415    -0.4733786803474565
+    Attrib pixel424    -0.4900355918022356
+    Attrib pixel467    -0.36461466366915446
+    Attrib pixel468    0.7564463964459605
+    Attrib pixel469    0.7405154383792262
+    Attrib pixel490    -0.2151029978333925
+    Attrib pixel491    0.678785781854438
+    Attrib pixel492    0.6964639212025697
+    Attrib pixel493    1.6378441425389236
+    Attrib pixel515    0.6504815503240232
+    Attrib pixel563    0.17882001080810617
+    Attrib pixel566    -0.06404748487665304
+Sigmoid Node 9
+    Inputs    Weights
+    Threshold    -1.289537272680413
+    Attrib pixel180    -0.29648529020245457
+    Attrib pixel343    0.6803327975597806
+    Attrib pixel367    -0.4048139299097479
+    Attrib pixel368    0.7928554978806699
+    Attrib pixel376    3.0121387615189734
+    Attrib pixel391    -1.5744190465820609
+    Attrib pixel400    2.317940262171072
+    Attrib pixel401    3.2681732409174367
+    Attrib pixel415    -1.6762228749996695
+    Attrib pixel424    2.9342839557487834
+    Attrib pixel467    -1.9610662102579655
+    Attrib pixel468    -0.8609965147455194
+    Attrib pixel469    -0.4306853695869125
+    Attrib pixel490    1.518099255697593
+    Attrib pixel491    0.15730468856645366
+    Attrib pixel492    -0.23263904451562095
+    Attrib pixel493    -3.682186595441237
+    Attrib pixel515    -2.265578947871024
+    Attrib pixel563    -1.4410936907312928
+    Attrib pixel566    -0.4360937770803524
+Sigmoid Node 10
+    Inputs    Weights
+    Threshold    -3.479582138663871
+    Attrib pixel180    1.1930708563021608
+    Attrib pixel343    0.026147087200524662
+    Attrib pixel367    0.2503925511513139
+    Attrib pixel368    -2.788581656360745
+    Attrib pixel376    -0.5929497436969658
+    Attrib pixel391    -0.5861357699865082
+    Attrib pixel400    -0.6663898153727751
+    Attrib pixel401    1.631275383521592
+    Attrib pixel415    -1.6875547259314294
+    Attrib pixel424    -1.235492167858325
+    Attrib pixel467    -0.10147157920588244
+    Attrib pixel468    1.1727524103526512
+    Attrib pixel469    -0.5048025589170408
+    Attrib pixel490    -1.3175651032619178
+    Attrib pixel491    0.5686058201912074
+    Attrib pixel492    0.4959861531811929
+    Attrib pixel493    -0.23233723475804618
+    Attrib pixel515    1.8787086314446537
+    Attrib pixel563    -1.26277913240637
+    Attrib pixel566    -0.9857818747124265
+Sigmoid Node 11
+    Inputs    Weights
+    Threshold    -0.5339735244961429
+    Attrib pixel180    2.728340349951392
+    Attrib pixel343    1.9847316643902668
+    Attrib pixel367    -3.7240752911350756
+    Attrib pixel368    -0.5334976893025004
+    Attrib pixel376    -1.3333261312964804
+    Attrib pixel391    -5.085373230964958
+    Attrib pixel400    -1.618170543051764
+    Attrib pixel401    -0.42135127775583936
+    Attrib pixel415    -4.927738014698013
+    Attrib pixel424    -0.671906996184522
+    Attrib pixel467    1.4294507264846859
+    Attrib pixel468    1.70814861679362
+    Attrib pixel469    0.15622273831853942
+    Attrib pixel490    3.587338418476653
+    Attrib pixel491    0.7153849362736461
+    Attrib pixel492    0.24009214805803897
+    Attrib pixel493    -2.107666586222588
+    Attrib pixel515    3.1856016482839684
+    Attrib pixel563    2.351582443613309
+    Attrib pixel566    2.181642628842971
+Sigmoid Node 12
+    Inputs    Weights
+    Threshold    -3.600791866337241
+    Attrib pixel180    -1.575317711696973
+    Attrib pixel343    -3.3349661296487128
+    Attrib pixel367    -0.6194991373785862
+    Attrib pixel368    -0.48386791598728884
+    Attrib pixel376    -1.0688813483919972
+    Attrib pixel391    -0.02253090100141844
+    Attrib pixel400    0.3973499187448293
+    Attrib pixel401    -1.0828185725091128
+    Attrib pixel415    2.3914568084023315
+    Attrib pixel424    2.457399603588027
+    Attrib pixel467    -1.2276871825271576
+    Attrib pixel468    0.4531777910298533
+    Attrib pixel469    -0.0868330053981499
+    Attrib pixel490    -1.9400475968380198
+    Attrib pixel491    -0.24564455033269172
+    Attrib pixel492    0.7598000717159541
+    Attrib pixel493    -1.800320237639923
+    Attrib pixel515    2.2741735078175354
+    Attrib pixel563    5.855501249076716
+    Attrib pixel566    0.18906642602614152
+Sigmoid Node 13
+    Inputs    Weights
+    Threshold    -2.8812346541221903
+    Attrib pixel180    -1.3431212367369811
+    Attrib pixel343    2.6530860485106027
+    Attrib pixel367    1.0645094859554656
+    Attrib pixel368    1.6073611621663344
+    Attrib pixel376    -2.080169385793618
+    Attrib pixel391    0.33918910400349467
+    Attrib pixel400    -0.2586288084628595
+    Attrib pixel401    -0.876369555027331
+    Attrib pixel415    1.9357307965491133
+    Attrib pixel424    0.25123991650654715
+    Attrib pixel467    1.474773262459951
+    Attrib pixel468    -1.10520468901302
+    Attrib pixel469    -1.2493122197933477
+    Attrib pixel490    -0.20644982917649338
+    Attrib pixel491    0.3858983029626337
+    Attrib pixel492    -1.3772131640191545
+    Attrib pixel493    0.41449299944299284
+    Attrib pixel515    -0.10433014086367835
+    Attrib pixel563    -0.7297811820674464
+    Attrib pixel566    0.04004468176732632
+Sigmoid Node 14
+    Inputs    Weights
+    Threshold    -5.27748061682197
+    Attrib pixel180    1.1061363809014173
+    Attrib pixel343    -0.4180916713742091
+    Attrib pixel367    0.3764509281293528
+    Attrib pixel368    0.9664009554478494
+    Attrib pixel376    0.9690808693236567
+    Attrib pixel391    -0.14379577202036184
+    Attrib pixel400    -1.3428646937470947
+    Attrib pixel401    -1.344982571589576
+    Attrib pixel415    1.3920981872330283
+    Attrib pixel424    -0.1736908585979789
+    Attrib pixel467    -5.577351937308735
+    Attrib pixel468    -2.594416431222232
+    Attrib pixel469    0.7817420612686917
+    Attrib pixel490    -0.7849737465875902
+    Attrib pixel491    -2.228001916382588
+    Attrib pixel492    -1.1023028194281577
+    Attrib pixel493    0.685183492388836
+    Attrib pixel515    1.689294115664363
+    Attrib pixel563    0.28999224760507214
+    Attrib pixel566    2.483365550386645
+Sigmoid Node 15
+    Inputs    Weights
+    Threshold    -3.5866734959910676
+    Attrib pixel180    3.2217413943070214
+    Attrib pixel343    0.9595751615362907
+    Attrib pixel367    -0.11193663650631139
+    Attrib pixel368    -2.8990346874363992
+    Attrib pixel376    -0.8594692201498287
+    Attrib pixel391    -0.7211501635335721
+    Attrib pixel400    -2.0713012318304225
+    Attrib pixel401    3.166574826151528
+    Attrib pixel415    2.5049709873304
+    Attrib pixel424    1.0580071486902307
+    Attrib pixel467    3.1180114263485894
+    Attrib pixel468    0.9849924298586594
+    Attrib pixel469    -2.366965937419804
+    Attrib pixel490    -0.873897976910737
+    Attrib pixel491    1.2412542493700678
+    Attrib pixel492    0.5579322428930873
+    Attrib pixel493    -2.21388545306247
+    Attrib pixel515    -3.124320108040293
+    Attrib pixel563    -0.8745128308808281
+    Attrib pixel566    1.1259083340388965
+Sigmoid Node 16
+    Inputs    Weights
+    Threshold    -4.881111681700155
+    Attrib pixel180    3.1446658701351367
+    Attrib pixel343    0.8122523290906595
+    Attrib pixel367    1.0037915728588414
+    Attrib pixel368    1.6350194042080586
+    Attrib pixel376    1.766875271360428
+    Attrib pixel391    -0.028283606793965015
+    Attrib pixel400    -0.647035538623816
+    Attrib pixel401    -0.22502499795149453
+    Attrib pixel415    0.6608147891221821
+    Attrib pixel424    1.7890634421603624
+    Attrib pixel467    -1.0065225316850122
+    Attrib pixel468    -0.6415435624423755
+    Attrib pixel469    -0.04329382781679003
+    Attrib pixel490    -1.143878802960054
+    Attrib pixel491    0.5738178465914292
+    Attrib pixel492    -0.01359511615280844
+    Attrib pixel493    -1.3431019271980944
+    Attrib pixel515    -1.2721552652264883
+    Attrib pixel563    0.4713296085905537
+    Attrib pixel566    0.8258314034872745
+Sigmoid Node 17
+    Inputs    Weights
+    Threshold    -4.138940156566998
+    Attrib pixel180    0.5384186998724323
+    Attrib pixel343    -1.6572908566111215
+    Attrib pixel367    -1.0729332989818665
+    Attrib pixel368    2.6625039813078466
+    Attrib pixel376    1.0504177405425181
+    Attrib pixel391    -1.2787726323009818
+    Attrib pixel400    0.4213160434418214
+    Attrib pixel401    -3.917124404992927
+    Attrib pixel415    -0.5338564453087131
+    Attrib pixel424    -0.8871040909547988
+    Attrib pixel467    -0.14964847621742444
+    Attrib pixel468    1.0748036506036551
+    Attrib pixel469    -0.8028881808744462
+    Attrib pixel490    -1.4239400630621153
+    Attrib pixel491    1.326696421282046
+    Attrib pixel492    0.95508130207886
+    Attrib pixel493    -1.2998104037048344
+    Attrib pixel515    1.98996012124473
+    Attrib pixel563    -0.18157452180265796
+    Attrib pixel566    0.14211504556101
+Sigmoid Node 18
+    Inputs    Weights
+    Threshold    -4.821535243627603
+    Attrib pixel180    -1.922001337222936
+    Attrib pixel343    -0.20365337052927218
+    Attrib pixel367    -0.7936395735442302
+    Attrib pixel368    1.2406980381282957
+    Attrib pixel376    0.6522714825467076
+    Attrib pixel391    -0.0140112843115321
+    Attrib pixel400    2.937452607506507
+    Attrib pixel401    -0.11105846654903659
+    Attrib pixel415    -0.23486210009399058
+    Attrib pixel424    0.3452161438995614
+    Attrib pixel467    -0.04215400557627579
+    Attrib pixel468    -1.0341080957438467
+    Attrib pixel469    -0.26554849980080225
+    Attrib pixel490    -0.3745030483810453
+    Attrib pixel491    0.4560750224442752
+    Attrib pixel492    -0.2930738497246469
+    Attrib pixel493    0.25630565619985096
+    Attrib pixel515    -0.8598848508085415
+    Attrib pixel563    -1.6646016275835271
+    Attrib pixel566    -2.159396698840468
+Sigmoid Node 19
+    Inputs    Weights
+    Threshold    -4.176682960508944
+    Attrib pixel180    3.371962919866549
+    Attrib pixel343    0.45545570575314503
+    Attrib pixel367    -0.3411905277595042
+    Attrib pixel368    -3.1143037313343136
+    Attrib pixel376    -1.9664077331862944
+    Attrib pixel391    0.7685708961165173
+    Attrib pixel400    -2.478523943650877
+    Attrib pixel401    1.2667780077370792
+    Attrib pixel415    1.697835429829227
+    Attrib pixel424    -0.5904766025942751
+    Attrib pixel467    0.004552232709596977
+    Attrib pixel468    -1.091966130275937
+    Attrib pixel469    -1.7331074281468593
+    Attrib pixel490    0.33626017255079005
+    Attrib pixel491    1.3891898212102929
+    Attrib pixel492    0.17707086593605248
+    Attrib pixel493    -0.47245845142648674
+    Attrib pixel515    -1.868271900654671
+    Attrib pixel563    -0.47730523533668967
+    Attrib pixel566    2.88882655846355
+Class angry
+    Input
+    Node 0
+Class disgust
+    Input
+    Node 1
+Class fear
+    Input
+    Node 2
+Class happy
+    Input
+    Node 3
+Class neutral
+    Input
+    Node 4
+Class sad
+    Input
+    Node 5
+Class suprise
+    Input
+    Node 6
+
+
+Time taken to build model: 155.68 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0.04 seconds
+
+=== Summary ===
+
+Correctly Classified Instances        3780               35.1105 %
+Incorrectly Classified Instances      6986               64.8895 %
+Kappa statistic                          0.1928
+Mean absolute error                      0.2182
+Root mean squared error                  0.3301
+Relative absolute error                 92.3682 %
+Root relative squared error             96.0498 %
+Total Number of Instances            10766     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.097    0.054    0.224      0.097    0.136      0.062    0.602     0.185     angry
+                 0.000    0.000    ?          0.000    ?          ?        0.640     0.021     disgust
+                 0.019    0.010    0.232      0.019    0.034      0.027    0.578     0.184     fear
+                 0.717    0.329    0.419      0.717    0.529      0.340    0.759     0.538     happy
+                 0.459    0.254    0.278      0.459    0.346      0.172    0.663     0.270     neutral
+                 0.178    0.092    0.279      0.178    0.217      0.104    0.642     0.252     sad
+                 0.413    0.068    0.437      0.413    0.424      0.353    0.777     0.411     suprise
+Weighted Avg.    0.351    0.158    ?          0.351    ?          ?        0.675     0.322     
+
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g   <-- classified as
+  145    0   20  548  454  187  137 |    a = angry
+    7    0    0   63   43    9   13 |    b = disgust
+  132    0   29  550  490  162  203 |    c = fear
+  116    0   13 1916  357  178   92 |    d = happy
+   73    0   16  644  867  199   89 |    e = neutral
+  132    0   30  563  630  318  117 |    f = sad
+   43    0   17  291  281   87  505 |    g = suprise
+

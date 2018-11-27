@@ -1,0 +1,115 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.MultilayerPerceptron -L 0.3 -M 0.2 -N 100 -V 0 -S 0 -E 20 -H a -G -A -R
+Relation:     faces-weka.filters.unsupervised.attribute.Remove-V-R2-3,6,24-26,39,49-50,61,73,121,133,157-158,175,181-183,194,202,205-206,222,227,229-230,246,254,294,296,309,314,319,322,345-346,353,358,369-370,378,385-386,393,402-403,417-418,426,434,446,455,457,468-471,483,492-495,505-506,517,524,537,546,549,552-554,556,560-562,565,568-569,571,1-weka.filters.unsupervised.attribute.Remove-R1-17,19-35,37-39,43-44,49,51-55,59,64-65,67-77,80-81
+Instances:    35887
+Attributes:   21
+              pixel180
+              pixel343
+              pixel367
+              pixel368
+              pixel376
+              pixel391
+              pixel400
+              pixel401
+              pixel415
+              pixel424
+              pixel467
+              pixel468
+              pixel469
+              pixel490
+              pixel491
+              pixel492
+              pixel493
+              pixel515
+              pixel563
+              pixel566
+              emotion
+Test mode:    split 70.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+Sigmoid Node 0
+    Inputs    Weights
+    Threshold    0.01032826584077283
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -0.027103573879161093
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -0.026703245000762613
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -0.01590862173416204
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    0.045548173958285046
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    0.04390016850559868
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -0.038204418066732304
+Class angry
+    Input
+    Node 0
+Class disgust
+    Input
+    Node 1
+Class fear
+    Input
+    Node 2
+Class happy
+    Input
+    Node 3
+Class neutral
+    Input
+    Node 4
+Class sad
+    Input
+    Node 5
+Class suprise
+    Input
+    Node 6
+
+
+Time taken to build model: 1.16 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0.03 seconds
+
+=== Summary ===
+
+Correctly Classified Instances        3296               30.6149 %
+Incorrectly Classified Instances      7470               69.3851 %
+Kappa statistic                          0.1221
+Mean absolute error                      0.2273
+Root mean squared error                  0.3364
+Relative absolute error                 96.2438 %
+Root relative squared error             97.8787 %
+Total Number of Instances            10766     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.000    0.000    ?          0.000    ?          ?        0.535     0.157     angry
+                 0.000    0.000    ?          0.000    ?          ?        0.528     0.014     disgust
+                 0.000    0.000    ?          0.000    ?          ?        0.571     0.180     fear
+                 0.853    0.556    0.336      0.853    0.482      0.266    0.736     0.440     happy
+                 0.051    0.033    0.244      0.051    0.084      0.035    0.580     0.214     neutral
+                 0.215    0.162    0.209      0.215    0.212      0.052    0.569     0.202     sad
+                 0.438    0.127    0.306      0.438    0.360      0.267    0.723     0.311     suprise
+Weighted Avg.    0.306    0.185    ?          0.306    ?          ?        0.625     0.264     
+
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g   <-- classified as
+    0    0    0  917   51  294  229 |    a = angry
+    0    0    0   82    6   27   20 |    b = disgust
+    0    0    0  853   64  323  326 |    c = fear
+    0    0    0 2279   60  203  130 |    d = happy
+    0    0    0 1167   96  387  238 |    e = neutral
+    0    0    0 1055   78  385  272 |    f = sad
+    0    0    0  426   38  224  536 |    g = suprise
+

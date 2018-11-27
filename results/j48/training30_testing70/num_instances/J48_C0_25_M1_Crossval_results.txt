@@ -6465,7 +6465,7 @@ pixel24 > 0.962745
 Number of Leaves  : 	3231
 
 Size of the tree : 	6461
-J48 Cross Eval Classifier Built in 4.58596658706665 secs.
+J48 Cross Eval Classifier Built in 4.566816568374634 secs.
 
 Cross Evaluating on test data.
 Correctly Classified Instances        6998               27.8572 %
@@ -6497,4 +6497,4 @@ Weighted Avg.    0.279    0.150    0.278      0.279    0.278      0.128    0.564
  [ 612.   65.  594.  889.  853.  932.  332.]
  [ 260.   38.  365.  452.  346.  259. 1127.]]
 
-J48 Cross Eval Classifier Evaluated in 0.24893712997436523 secs.
+J48 Cross Eval Classifier Evaluated in 0.20478439331054688 secs.

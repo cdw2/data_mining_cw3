@@ -61,7 +61,7 @@ class cw3_classifier():
         # build classifier
         print("\nBuilding "+classifier_name+" Classifier on training data.")
         buildTimeStart=time.time()
-        cls = Classifier(classname=classifier_name, options=options_list)
+        cls = Classifier(classname=classifier_weka_spec, options=options_list)
         cls.build_classifier(self.training_data)
 
         resultsString = ""
@@ -98,7 +98,7 @@ class cw3_classifier():
         # build classifier
         print("\nBuilding "+classifier_name+" Classifier on training data.")
         buildTimeStart=time.time()
-        cls = Classifier(classname=classifier_name, options=options_list)
+        cls = Classifier(classname=classifier_weka_spec, options=options_list)
         cls.build_classifier(self.training_data)
 
         resultsString = ""

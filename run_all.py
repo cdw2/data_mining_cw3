@@ -21,12 +21,13 @@ if(len(sys.argv)==2):
 #part1
 filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
 filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
-filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
+# filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
+filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
 
 # testName = "part1_minimal_binary"
 # testName = "part1_minimal_pruning"
 # testName = "part1_minimal_confidence"
-testName = "j48/training30_testing70/num_instances"
+testName = "neural_network/train_test/validation"
 
 class myThread (threading.Thread):
    def __init__(self, threadID, name, function, args=None):
@@ -93,6 +94,24 @@ def run_j48_holdout(options):
     j48_cross.load_data_split(filename_full, 30)
     j48_cross.run_split("results/"+str(testName),"J48","weka.classifiers.trees.J48", options)
 
+def run_mlp_cross(options):
+    global filename_full, filename1, filename2, testName
+    jvm_helper = classify.cw3_helper()
+
+    mlp = classify.cw3_classifier()
+    # j48_cross.load_data_seperate(filename1,filename2)
+    mlp.load_data(filename_full)
+    mlp.run_crossval("results/"+str(testName),"MLP","weka.classifiers.functions.MultilayerPerceptron", options)
+
+def run_mlp_split(options):
+    global filename_full, filename1, filename2, testName
+    jvm_helper = classify.cw3_helper()
+
+    mlp = classify.cw3_classifier()
+    # j48_cross.load_data_seperate(filename1,filename2)
+    mlp.load_data_seperate(filename_full)
+    mlp.run_crossval("results/"+str(testName),"MLP","weka.classifiers.functions.MultilayerPerceptron", options)
+
 
 def run_classifiers():
 
@@ -118,20 +137,25 @@ def run_classifiers():
     # #Part 1 - Minimum_Number_Of_Instances
     # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "1"])
     # thread2 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
-    thread3 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "3"])
-    thread4 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "4"])
+    # thread3 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "3"])
+    # thread4 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "4"])
+
+
+    #Part2 - MLP
+    thread1 = myThread(4, "run_mlp", run_mlp_cross, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "30", "-H", "4", "-R"])
+    thread2 = myThread(4, "run_mlp", run_mlp_cross, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "40", "-H", "4", "-R"])
 
     # Start new Threads
-    # thread1.start()
-    # thread2.start()
-    thread3.start()
-    thread4.start()
+    thread1.start()
+    thread2.start()
+    # thread3.start()
+    # thread4.start()
 
     # Add threads to thread list
-    # threads.append(thread1)
-    # threads.append(thread2)
-    threads.append(thread3)
-    threads.append(thread4)
+    threads.append(thread1)
+    threads.append(thread2)
+    # threads.append(thread3)
+    # threads.append(thread4)
 
     # Wait for all threads to complete
     for t in threads:
