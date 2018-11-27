@@ -18,20 +18,31 @@ if(len(sys.argv)==2):
     if sys.argv[1]=="--preprocess":
         preprocess=True
 
-#part2
-filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
-filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
-filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
+#part1
+filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
+filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
+filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
 
-#Part 1
+# #part2
+# filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
+# filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
+# filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
+
+# experiemnt_name = "cross_validation"
+# experiemnt_name = "train_test"
+# experiemnt_name = "train70_test30"
+experiemnt_name = "train30_test70"
+
+#Part 1 J48
 # testName = "part1_minimal_binary"
 # testName = "part1_minimal_pruning"
 # testName = "part1_minimal_confidence"
 
-# experiemnt_name = "cross_validation"
-# experiemnt_name = "train_test"
-# experiment_name = "train70_test30"
-experiment_name = "train30_test70"
+#Part 1 Random Forest
+# testName = "random_forest/"+experiemnt_name+"/bag_size_percent"
+# testName = "random_forest/"+experiemnt_name+"/max_depth"
+# testName = "random_forest/"+experiemnt_name+"/num_features"
+testName = "random_forest/"+experiemnt_name+"/num_iterations"
 
 #Part 2
 # testName = "neural_network/"+experiment_name+"/learning_rate"
@@ -39,7 +50,7 @@ experiment_name = "train30_test70"
 # testName = "neural_network/"+experiment_name+"/num_epochs"
 # testName = "neural_network/"+experiment_name+"/num_layers"
 # testName = "neural_network/"+experiment_name+"/num_neurons"
-testName = "neural_network/"+experiment_name+"/validation"
+# testName = "neural_network/"+experiment_name+"/validation"
 
 class myThread (threading.Thread):
    def __init__(self, threadID, name, function, args=None):
@@ -124,6 +135,22 @@ def run_mlp_split(options):
     # mlp.load_data_seperate(filename1,filename2)
     mlp.run_split("results/"+str(testName),"MLP","weka.classifiers.functions.MultilayerPerceptron", options)
 
+def run_rf_cross(options):
+    global filename_full, filename1, filename2, testName
+    jvm_helper = classify.cw3_helper()
+
+    mlp = classify.cw3_classifier()
+    mlp.load_data(filename_full)
+    mlp.run_crossval("results/"+str(testName),"Random Forest","weka.classifiers.trees.RandomForest", options)
+
+def run_rf_split(options):
+    global filename_full, filename1, filename2, testName
+    jvm_helper = classify.cw3_helper()
+
+    mlp = classify.cw3_classifier()
+    # mlp.load_data_seperate(filename1,filename2)
+    mlp.load_data_split(filename_full, 30)
+    mlp.run_split("results/"+str(testName),"Random Forest","weka.classifiers.trees.RandomForest", options)
 
 def run_classifiers():
 
@@ -135,6 +162,8 @@ def run_classifiers():
     thread2 = None
     thread3 = None
     thread4 = None
+
+    #J48 ==================================================================
 
     #Part 1 - Binary Splits
     # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
@@ -155,6 +184,33 @@ def run_classifiers():
     # thread2 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
     # thread3 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "3"])
     # thread4 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "4"])
+
+    # Random Forest =======================================================
+    rf_function = run_rf_split
+
+    # #bag_size_percent
+    # thread1 = myThread(1, "run_rf", rf_function, ["-P", "25", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread2 = myThread(2, "run_rf", rf_function, ["-P", "50", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread3 = myThread(3, "run_rf", rf_function, ["-P", "75", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread4 = myThread(4, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+
+    #max depth
+    # thread1 = myThread(1, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1", "-depth", "10"])
+    # thread2 = myThread(2, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1", "-depth", "20"])
+    # thread3 = myThread(3, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1", "-depth", "30"])
+    # thread4 = myThread(4, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1", "-depth", "50"])
+
+    #num_features
+    # thread1 = myThread(1, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "20", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread2 = myThread(2, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "40", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread3 = myThread(3, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "60", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread4 = myThread(4, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "10", "-M", "1.0", "-V", "0.001", "-S", "1"])
+
+    #num_iterations
+    # thread1 = myThread(1, "run_rf", rf_function, ["-P", "100", "-I", "25", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread2 = myThread(2, "run_rf", rf_function, ["-P", "100", "-I", "50", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread3 = myThread(3, "run_rf", rf_function, ["-P", "100", "-I", "75", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
+    # thread4 = myThread(4, "run_rf", rf_function, ["-P", "100", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
 
 
     #Part2 - MLP ==========================================================
