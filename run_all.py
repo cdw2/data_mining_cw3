@@ -18,38 +18,52 @@ if(len(sys.argv)==2):
     if sys.argv[1]=="--preprocess":
         preprocess=True
 
-#part1
-filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
-filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
-filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
+#Part 1 Full Dataset
+# filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
+# filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
+# filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
 
-# #part2
-# filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
-# filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
-# filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
+#Part 1 - Happy Only
+#filename1 = "fer2018/transformed_arffs/fer2017-training-happy-cfs.arff"
+#filename2 = "fer2018/transformed_arffs/fer2017-testing-happy-cfs.arff"
+#filename_full = "fer2018/transformed_arffs/fer2017-happy-full-cfs.arff"
 
-# experiemnt_name = "cross_validation"
-# experiemnt_name = "train_test"
-# experiemnt_name = "train70_test30"
-experiemnt_name = "train30_test70"
+# #Part 2 Full Dataset
+filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
+filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
+filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
+
+#Part 2 - Happy Only
+# filename1 = "fer2018/transformed_arffs/fer2017-training-happy-neural-cfs.arff"
+# filename2 = "fer2018/transformed_arffs/fer2017-testing-happy-neural-cfs.arff"
+# filename_full = "fer2018/transformed_arffs/fer2017-happy-neural-cfs.arff"
+
+# exp_modifier = "_happy"
+exp_modifier = ""
+
+experiment_name = "cross_validation" + exp_modifier
+# experiment_name = "train_test" + exp_modifier
+# experiment_name = "train70_test30" + exp_modifier
+# experiment_name = "train30_test70" + exp_modifier
 
 #Part 1 J48
-# testName = "part1_minimal_binary"
-# testName = "part1_minimal_pruning"
-# testName = "part1_minimal_confidence"
+# testName = "j48/"+experiment_name+"/binary"
+# testName = "j48/"+experiment_name+"/pruning"
+# testName = "j48/"+experiment_name+"/confidence"
+# testName = "j48/"+experiment_name+"/instances"
 
 #Part 1 Random Forest
-# testName = "random_forest/"+experiemnt_name+"/bag_size_percent"
-# testName = "random_forest/"+experiemnt_name+"/max_depth"
-# testName = "random_forest/"+experiemnt_name+"/num_features"
-testName = "random_forest/"+experiemnt_name+"/num_iterations"
+# testName = "random_forest/"+experiment_name+"/bag_size_percent"
+# testName = "random_forest/"+experiment_name+"/max_depth"
+# testName = "random_forest/"+experiment_name+"/num_features"
+# testName = "random_forest/"+experiment_name+"/num_iterations"
 
 #Part 2
 # testName = "neural_network/"+experiment_name+"/learning_rate"
 # testName = "neural_network/"+experiment_name+"/momentum"
 # testName = "neural_network/"+experiment_name+"/num_epochs"
 # testName = "neural_network/"+experiment_name+"/num_layers"
-# testName = "neural_network/"+experiment_name+"/num_neurons"
+testName = "neural_network/"+experiment_name+"/num_neurons"
 # testName = "neural_network/"+experiment_name+"/validation"
 
 class myThread (threading.Thread):
@@ -164,29 +178,30 @@ def run_classifiers():
     thread4 = None
 
     #J48 ==================================================================
+    j48_function = run_j48_cross
 
     #Part 1 - Binary Splits
-    # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
-    # thread2 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-B", "-M", "2"])
+    # thread1 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
+    # thread2 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-B", "-M", "2"])
 
     #Part 1 - Pruning
-    # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
-    # thread2 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-U", "-M", "2"])
+    # thread1 = myThread(1, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
+    # thread2 = myThread(2, "run_j48", j48_function, ["-U", "-M", "2"])
 
     #Part 1 - Confidence Threshold
-    # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.10", "-M", "2"])
-    # thread2 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
-    # thread3 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.35", "-M", "2"])
-    # thread4 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.50", "-M", "2"])
+    # thread1 = myThread(1, "run_j48", j48_function, ["-C", "0.10", "-M", "2"])
+    # thread2 = myThread(2, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
+    # thread3 = myThread(3, "run_j48", j48_function, ["-C", "0.35", "-M", "2"])
+    # thread4 = myThread(4, "run_j48", j48_function, ["-C", "0.50", "-M", "2"])
 
     # #Part 1 - Minimum_Number_Of_Instances
-    # thread1 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "1"])
-    # thread2 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "2"])
-    # thread3 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "3"])
-    # thread4 = myThread(4, "run_j48_holdout", run_j48_holdout, ["-C", "0.25", "-M", "4"])
+    # thread1 = myThread(1, "run_j48", j48_function, ["-C", "0.25", "-M", "1"])
+    # thread2 = myThread(2, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
+    # thread3 = myThread(3, "run_j48", j48_function, ["-C", "0.25", "-M", "3"])
+    # thread4 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-M", "4"])
 
     # Random Forest =======================================================
-    rf_function = run_rf_split
+    rf_function = run_rf_cross
 
     # #bag_size_percent
     # thread1 = myThread(1, "run_rf", rf_function, ["-P", "25", "-I", "100", "-num-slots", "4", "-K", "0", "-M", "1.0", "-V", "0.001", "-S", "1"])
@@ -214,14 +229,14 @@ def run_classifiers():
 
 
     #Part2 - MLP ==========================================================
-    mlpfunction = run_mlp_split
+    mlpfunction = run_mlp_cross
     #learning rate
     # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "3.0", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.03", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.003", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
 
-    # #momentum
+    # # #momentum
     # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.1", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.3", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
@@ -240,7 +255,7 @@ def run_classifiers():
     # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4,4,4,4", "-R"])
 
     # #num_neurons
-    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "1", "-R"])
+    thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "20", "-R"])
     # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "8", "-R"])
     # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "12", "-R"])

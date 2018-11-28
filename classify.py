@@ -20,6 +20,7 @@ class cw3_classifier():
         print("\nLoading dataset: " + filename)
         loader = Loader(classname="weka.core.converters.ArffLoader")
         data = loader.load_file(filename)
+        # data.class_is_first()
         data.class_is_last()
         if(filter):
             data = self.filter_data(data)
