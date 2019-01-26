@@ -19,9 +19,9 @@ if(len(sys.argv)==2):
         preprocess=True
 
 #Part 1 Full Dataset
-# filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
-# filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
-# filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
+filename1 = "fer2018/transformed_arffs/fer2017-training-cfs.arff"
+filename2 = "fer2018/transformed_arffs/fer2017-testing-cfs.arff"
+filename_full = "fer2018/transformed_arffs/fer2017-full-cfs.arff"
 
 #Part 1 - Happy Only
 #filename1 = "fer2018/transformed_arffs/fer2017-training-happy-cfs.arff"
@@ -29,9 +29,9 @@ if(len(sys.argv)==2):
 #filename_full = "fer2018/transformed_arffs/fer2017-happy-full-cfs.arff"
 
 # #Part 2 Full Dataset
-filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
-filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
-filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
+# filename1 = "fer2018/transformed_arffs/fer2017-training-neural-cfs.arff"
+# filename2 = "fer2018/transformed_arffs/fer2017-testing-neural-cfs.arff"
+# filename_full = "fer2018/transformed_arffs/fer2017-neural-cfs.arff"
 
 #Part 2 - Happy Only
 # filename1 = "fer2018/transformed_arffs/fer2017-training-happy-neural-cfs.arff"
@@ -180,9 +180,9 @@ def run_classifiers():
     #J48 ==================================================================
     j48_function = run_j48_cross
 
-    #Part 1 - Binary Splits
-    # thread1 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
-    # thread2 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-B", "-M", "2"])
+    # Part 1 - Binary Splits
+    thread1 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
+    thread2 = myThread(4, "run_j48", j48_function, ["-C", "0.25", "-B", "-M", "2"])
 
     #Part 1 - Pruning
     # thread1 = myThread(1, "run_j48", j48_function, ["-C", "0.25", "-M", "2"])
@@ -255,7 +255,7 @@ def run_classifiers():
     # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4,4,4,4", "-R"])
 
     # #num_neurons
-    thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "20", "-R"])
+    # thread1 = myThread(1, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "20", "-R"])
     # thread2 = myThread(2, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "4", "-R"])
     # thread3 = myThread(3, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "8", "-R"])
     # thread4 = myThread(4, "run_mlp", mlpfunction, ["-L", "0.3", "-M", "0.2", "-N", "100", "-V", "0", "-S", "0", "-E", "20", "-H", "12", "-R"])
